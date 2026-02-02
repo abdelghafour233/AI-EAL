@@ -1,0 +1,5 @@
+{
+  "name": "محول الصور الذكي (AI Image Transformer)",
+  "description": "تطبيق لتحويل وتعديل الصور باستخدام الذكاء الاصطناعي (Gemini 2.5 Flash Image). قم برفع صورة واكتب وصفاً للتعديل.",
+  "requestFramePermissions": []
+}
