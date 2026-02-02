@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { Image as ImageIcon, Wand2, Upload, Download, AlertCircle, RefreshCw, Sparkles } from 'lucide-react';
+import { Image as ImageIcon, Wand2, Upload, Download, AlertCircle, RefreshCw, Sparkles, Github } from 'lucide-react';
 import { ImageState, ProcessingStatus } from './types';
 import { generateImageTransformation } from './services/geminiService';
 import { Spinner } from './components/Spinner';
@@ -83,7 +83,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white selection:bg-purple-500 selection:text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white selection:bg-purple-500 selection:text-white flex flex-col">
       
       {/* Header */}
       <header className="border-b border-white/10 backdrop-blur-md sticky top-0 z-10">
@@ -102,13 +102,13 @@ const App: React.FC = () => {
             rel="noreferrer"
             className="hidden sm:flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
           >
+            <Github className="w-5 h-5" />
             <span>GitHub</span>
-            <div className="w-5 h-5 border border-current rounded-full flex items-center justify-center">?</div>
           </a>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-8 pb-20">
+      <main className="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
         
         {/* Intro */}
         <div className="text-center mb-12 space-y-4">
@@ -277,6 +277,24 @@ const App: React.FC = () => {
 
         </div>
       </main>
+
+      <footer className="border-t border-white/10 mt-auto py-8 bg-black/20 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-slate-400 text-sm">
+            © {new Date().getFullYear()} محول الصور الذكي | AI Image Transformer
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
+              <Github className="w-5 h-5 group-hover:text-purple-400 transition-colors" />
+              <span>GitHub</span>
+            </a>
+            <a href="https://vercel.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 group-hover:text-white transition-colors"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>
+              <span>Vercel</span>
+            </a>
+          </div>
+        </div>
+      </footer>
 
     </div>
   );
