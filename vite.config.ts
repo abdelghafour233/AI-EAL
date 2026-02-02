@@ -1,15 +1,26 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  base: './', // Ensures relative paths for assets (critical for GitHub Pages)
-  server: {
-    port: 3000,
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: true
+export default defineConfig(({ mode }) => {
+  // Load env file based on `mode` in the current working directory.
+  // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
+  const env = loadEnv(mode, (process as any).cwd(), '');
+
+  return {
+    plugins: [react()],
+    base: './', // Important for GitHub Pages to work in subdirectories
+    define: {
+      // This is critical: Replaces 'process.env.API_KEY' in your code with the actual value during build
+      // preventing "ReferenceError: process is not defined" in the browser.
+      'process.env.API_KEY': JSON.stringify(env.API_KEY || '')
+    },
+    server: {
+      port: 3000,
+    },
+    build: {
+      outDir: 'dist',
+      sourcemap: true
+    }
   }
 })
